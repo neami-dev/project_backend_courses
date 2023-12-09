@@ -4,7 +4,6 @@ const Course = require("../models/courses.modul");
 const getAllcourses = async (req, res) => {
     const courses = await Course.find();
     res.json(courses);
-    console.log(courses);
 };
 const getCourse = async (req, res) => {
     try {
