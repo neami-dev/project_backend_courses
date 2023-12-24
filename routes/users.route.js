@@ -7,7 +7,7 @@ const appError = require("../utils/appError");
 
 const storage = multer.diskStorage({
     destination:(req,file,cb)=>{
-        cb(null,"./Uploads/")
+        cb(null,"Uploads")
     },
     filename:function(req,file,cb){
         const fileName = `user-${Date.now()}_${file.originalname}`;
