@@ -10,7 +10,7 @@ const path = require("path");
 
 const port = process.env.PORT;
 const url = process.env.MONGO_URL;
-app.use("/uploads",express.static(path.join(__dirname)))
+app.use(express.static(path.join(__dirname,"uploads")))
 mongoose
     .connect(url)
     .then(() => {
