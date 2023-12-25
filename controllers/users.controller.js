@@ -15,22 +15,28 @@ const getAllUsers = asyncWrapper(async (req, res) => {
     const page = query.page || 1;
     const skip = (page - 1) * limit;
     const Users = await User.find({}, { __v: 0,password:0 }).limit(limit).skip(skip);
-    res.json({ status: httpStatusText.SUCCESS, data: { Users } });
+    res.status(200).json({ status: httpStatusText.SUCCESS, data: { Users } });
 });
 
 const register = asyncWrapper(async (req, res,next) => {
     const { firstName, lastName, email, password,role } = req.body;
-   const oldUser = await User.findOne({email})
-
+    const oldUser = await User.findOne({email})
+  
+ 
+    
    if (oldUser) {
     const error = appError.create("use already exists ",400, httpStatusText.FAIL );
     return next(error);
    }
-   const HashedPassword =await bcrypt.hash(password,10);4
-
-    const newUser = new User({ firstName, lastName, email, password:HashedPassword,role ,avatar:req.file.filename});
+   const HashedPassword =await bcrypt.hash(password,10);
+   
+    const newUser = new User({ firstName, lastName, email, password:HashedPassword,role });
+    if(req.file !== undefined ){
+        newUser["avatar"] =req.file.filename;
+    }
     // generate JWT token 
-    const token = await generateJWT({email:newUser.email,id:newUser._id,role:newUser.role})
+    
+       const token = await generateJWT({email:newUser.email,id:newUser._id,role:newUser.role})
    newUser.token = token;
   
     await newUser.save();
