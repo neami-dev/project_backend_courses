@@ -7,10 +7,10 @@ const usersRouter = require("./routes/users.route");
 const coursesRouter = require("./routes/courses.router");
 const cors = require("cors");
 const path = require("path");
-
 const port = process.env.PORT;
 const url = process.env.MONGO_URL;
-app.use(express.static(path.join(__dirname,"uploads")))
+
+app.use("/uploads",express.static(path.join(__dirname,"uploads")))
 mongoose
     .connect(url)
     .then(() => {
