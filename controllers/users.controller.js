@@ -45,7 +45,6 @@ const register = asyncWrapper(async (req, res,next) => {
    
     const newUser = new User({ firstName, lastName, email, password:HashedPassword,role });
 
-    
     if(req.file !== undefined ){
         const fileName = `user-${Date.now()}_${req.file.originalname}`;
         const storageRef = ref(storage,fileName)
