@@ -5,6 +5,7 @@ const { validitionSchema } = require("../middlewares/validitionSchema");
 const verifyToken = require("../middlewares/verfiyToken");
 const userRoles = require("../utils/userRoles");
 const allowedTo = require("../middlewares/allowedTo");
+
 router
     .route("/")
     .get(verifyToken,coursesController.getAllcourses)
