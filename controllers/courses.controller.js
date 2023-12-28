@@ -5,7 +5,7 @@ const asyncWrapper = require("../middlewares/asyncWrapper");
 const appError = require("../utils/appError");
 
 const getAllcourses = asyncWrapper(async (req, res) => {
-    const query = req.query;
+    const query  = req.query;
     const limit = +query.limit || 6;
     const page =  +query.page || 1;
      
